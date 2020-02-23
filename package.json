@@ -1,0 +1,23 @@
+{
+  "name": "house-router",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec babel-node ./src/index-local.js -r dotenv/config"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs3": "^7.8.4",
+    "@googlemaps/google-maps-services-js": "^2.0.2",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0"
+  }
+}
