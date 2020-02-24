@@ -1,27 +1,34 @@
 exports.sampleResponse = {
   data: {
     destination_addresses: [
-      "New York, NY, USA",
-      "Seattle, WA, USA"
-    ],
-    origin_addresses: [
-      "Washington, DC, USA"
+      "15146 65th Ave S, Tukwila, WA 98188, USA",
+      "15146 65th Ave S, Tukwila, WA 98188, USA",
+      "15210 Macadam Rd S APT D103, Tukwila, WA 98188, USA"
+    ], origin_addresses: [
+      "13905 56th Pl S, Tukwila, WA 98168, USA"
     ],
     rows: [
       {
         elements: [
           {
             distance: {
-              text: "364 km", value: 364002
+              text: "2.3 km", value: 2257
             }, duration: {
-              text: "3 hours 53 mins", value: 13959
+              text: "5 mins", value: 290
             }, status: "OK"
           },
           {
             distance: {
-              text: "4,458 km", value: 4457977
+              text: "2.3 km", value: 2257
             }, duration: {
-              text: "1 day 17 hours", value: 148082
+              text: "5 mins", value: 290
+            }, status: "OK"
+          },
+          {
+            distance: {
+              text: "1.9 km", value: 1921
+            }, duration: {
+              text: "4 mins", value: 226
             }, status: "OK"
           }
         ]
@@ -29,3 +36,4 @@ exports.sampleResponse = {
     ], status: "OK"
   }
 };
+
