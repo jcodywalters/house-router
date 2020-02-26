@@ -2,14 +2,17 @@
   "name": "house-router",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/index-local.js -r dotenv/config"
+    "dev": "nodemon --exec babel-node ./src/api/app-local.js -r dotenv/config"
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.8.4",
     "@googlemaps/google-maps-services-js": "^2.0.2",
-    "dotenv": "^8.2.0"
+    "aws-serverless-express": "^3.3.6",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
