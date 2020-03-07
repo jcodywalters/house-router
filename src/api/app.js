@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 import { HouseRouter } from './houseRouter';
 
@@ -9,6 +10,7 @@ const router = express.Router();
 
 router.use(awsServerlessExpressMiddleware.eventContext());
 router.use(bodyParser.json());
+router.use(cors());
 
 const {
   ENV,
@@ -19,6 +21,9 @@ router.post('/', async (req, res) => {
   const { body } = req;
   const origin = body.origin;
   const destinations = body.destinations;
+  
+  //todo: validate payload
+
   if (!(destinations.length <= DESTINATION_LIMIT)) {
     res.status(400).send({ error: 'Destination list beyond limit'});
   }

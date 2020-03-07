@@ -7,6 +7,7 @@ class GoogleMapsClient {
     this.client = new Client({});
     this.key = process.env.GOOGLE_MAPS_API_KEY;
     this.env = process.env.ENV;
+    this.enableGoogleapi = process.env.ENABLE_GOOGLE_API;
   }
 
   /**
@@ -16,7 +17,7 @@ class GoogleMapsClient {
    * @returns {[]Objects} Array of elements from google-maps-service
    */
   async getDistances(origins, destinations) {
-    if (this.env != 'production') { return sampleResponse.data.rows[0].elements } // force to use sampleResponse to save on api cost
+    if (this.enableGoogleapi === 'false') { return sampleResponse.data.rows[0].elements } // force to use sampleResponse to save on api cost
     const params = {
       origins: [origins],
       destinations,
