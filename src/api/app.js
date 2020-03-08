@@ -2,38 +2,27 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
-import { HouseRouter } from './houseRouter';
+import fileUpload from 'express-fileupload';
 
-const houseRouter = new HouseRouter();
-const app = express();
-const router = express.Router();
-
-router.use(awsServerlessExpressMiddleware.eventContext());
-router.use(bodyParser.json());
-router.use(cors());
+import upload from './endpoints/fileUpload/post';
+import post from './endpoints/post';
 
 const {
   ENV,
-  DESTINATION_LIMIT = 10,
 } = process.env;
 
-router.post('/', async (req, res) => {
-  const { body } = req;
-  const origin = body.origin;
-  const destinations = body.destinations;
-  
-  //todo: validate payload
+const app = express();
 
-  if (!(destinations.length <= DESTINATION_LIMIT)) {
-    res.status(400).send({ error: 'Destination list beyond limit'});
-  }
-  try {
-    const result = await houseRouter.createOptimizedList(origin, destinations);
-    res.status(200).send(result);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+// Configure the router
+const router = express.Router();
+router.use(awsServerlessExpressMiddleware.eventContext());
+router.use(bodyParser.json());
+router.use(cors());
+router.use(fileUpload());
+
+// Assign routes
+router.post('/', post);
+router.post('/upload', upload);
 
 
 // BasePath + StageName when for local dev/unit testing
