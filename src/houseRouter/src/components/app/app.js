@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import './app.css';
 
 class App extends Component {
   constructor(props) {
