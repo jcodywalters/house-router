@@ -1,1 +1,1 @@
-export { default } from './app/fileUpload';
+export { default } from './app/Landing';
