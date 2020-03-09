@@ -3,8 +3,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 import fileUpload from 'express-fileupload';
+import morgan from 'morgan';
 
-import upload from './endpoints/fileUpload/post';
+import upload from './endpoints/upload/post';
 import post from './endpoints/post';
 
 const {
@@ -19,6 +20,7 @@ router.use(awsServerlessExpressMiddleware.eventContext());
 router.use(bodyParser.json());
 router.use(cors());
 router.use(fileUpload());
+router.use(morgan('combined'));
 
 // Assign routes
 router.post('/', post);
