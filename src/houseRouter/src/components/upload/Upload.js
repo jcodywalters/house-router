@@ -15,7 +15,7 @@ class Upload extends Component {
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.renderActions = this.renderActions.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
-    // this.sendRequest = this.sendRequest.bind(this);
+    this.sendRequest = this.sendRequest.bind(this);
   }
 
   onFilesAdded(files) {
@@ -76,6 +76,7 @@ class Upload extends Component {
     try {
       await Promise.all(promises);
       this.setState({ successfulUploaded: true, uploading: false });
+      this.props.history.push('/details');
     } catch (err) {
       console.log('error: ', err);
       this.setState({ successfulUploaded: true, uploading: false });
@@ -88,7 +89,7 @@ class Upload extends Component {
 
       req.upload.addEventListener("progress", event => {
         if (event.lengthComputable) {
-          const copy = { ... this.state.uploadProgress };
+          const copy = { ...this.state.uploadProgress };
           copy[file.name] = {
             state: "pending",
             percentage: (event.loaded / event.total) * 100
