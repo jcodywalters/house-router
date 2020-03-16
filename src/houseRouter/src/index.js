@@ -8,14 +8,14 @@ import {
 
 import './index.css';
 import Landing from './components/landing/Landing'
-import App from './components/app/app'
+import Details from './components/details/Details'
 
 ReactDOM.render((
   <Router>
   <div>
     <Switch>
       <Route exact path="/" component={Landing}></Route>
-      <Route exact path="/details" component={App}></Route>
+      <Route exact path="/details" component={Details}></Route>
     </Switch>
   </div>
 </Router>
