@@ -10,6 +10,7 @@ class Upload extends Component {
       files: [],
       uploading: false,
       uploadProgress: {},
+      uploadResponse: {},
       successfulUploaded: false
     }
     this.onFilesAdded = this.onFilesAdded.bind(this);
@@ -48,11 +49,13 @@ class Upload extends Component {
     if (this.state.successfulUploaded) {
       return (
         <button
-          onClick={() =>
+          onClick={() => {
             this.setState({ files: [], successfulUploaded: false })
+            this.props.history.push('/details', this.state);
+          }
           }
         >
-          Clear
+          Next
         </button>
       );
     } else {
@@ -76,7 +79,6 @@ class Upload extends Component {
     try {
       await Promise.all(promises);
       this.setState({ successfulUploaded: true, uploading: false });
-      this.props.history.push('/details');
     } catch (err) {
       console.log('error: ', err);
       this.setState({ successfulUploaded: true, uploading: false });
@@ -111,6 +113,10 @@ class Upload extends Component {
         this.setState({ uploadProgress: copy });
         reject(req.response);
       });
+
+      req.onload = ((res) => {
+        this.setState({ uploadResponse: res.srcElement.response })
+      })
 
       const formData = new FormData();
       formData.append("file", file, file.name);

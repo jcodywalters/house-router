@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './app.css';
+import './Details.css';
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +29,12 @@ class App extends Component {
     console.log('!! result =>  ', data, '!!');
   }
 
+  componentDidMount() {
+    console.log(this.props)
+    this.setState({destinations: ['15146 65th Ave S']})
+    // const { data } = await axios.get()
+  }
+
   render() {
     return (
       <div className="App">
@@ -39,7 +45,7 @@ class App extends Component {
             type="text"
             onChange={this.handleChange}
             name="origin"
-            defaultValue="13905 56th Pl S, Tukwila, WA 98168, USA"
+            defaultValue="<Enter Starting Address>"
           />
           <p>Add your list of addresses</p>
           <textarea
@@ -47,7 +53,8 @@ class App extends Component {
             cols="35"
             name="destinations"
             onChange={this.handleChange}
-            defaultValue="15146 65th Ave S, Tukwila, WA 98188, USA;15146 65th Ave S, Tukwila, WA 98188, USA;15210 Macadam Rd S APT D103, Tukwila, WA 98188, USA"
+            // defaultValue="15146 65th Ave S, Tukwila, WA 98188, USA;15146 65th Ave S, Tukwila, WA 98188, USA;15210 Macadam Rd S APT D103, Tukwila, WA 98188, USA"
+            defaultValue={this.state.destinations}
           />
           <input type="submit" value="Optimize Routes!" size="50" onClick={this.handleSubmit}></input>
           <p></p>

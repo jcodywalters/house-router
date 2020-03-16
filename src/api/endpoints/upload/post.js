@@ -7,7 +7,7 @@ module.exports = async function upload(req, res) {
   const file = req.files.file;
   try {
     await file.mv(`./tmp/${file.name}`);
-    res.status(200).send('received file')
+    res.status(200).send({ id: '1234', text: 'receivedFile' })
   } catch (err) {
     res.status(500).send(err)
   }
