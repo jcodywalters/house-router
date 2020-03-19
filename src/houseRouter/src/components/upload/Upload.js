@@ -121,7 +121,7 @@ class Upload extends Component {
       const formData = new FormData();
       formData.append("file", file, file.name);
 
-      req.open("POST", 'http://localhost:3000/house-router-dev/v1/upload');
+      req.open("POST", 'http://localhost:8000/house-router-dev/v1/upload');
       req.send(formData);
     })
   }
