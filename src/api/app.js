@@ -7,6 +7,7 @@ import morgan from 'morgan';
 
 import upload from './endpoints/upload/post';
 import post from './endpoints/post';
+import details from './endpoints/destinations/get';
 
 const {
   ENV,
@@ -25,6 +26,7 @@ router.use(morgan('combined'));
 // Assign routes
 router.post('/', post);
 router.post('/upload', upload);
+router.get('/destinations', details);
 
 
 // BasePath + StageName when for local dev/unit testing
