@@ -21,7 +21,7 @@ module.exports = async function upload(req, res) {
     };
 
     const s3Response = await s3.upload(params).promise();
-    res.status(200).send({ id: s3Response.key, location: s3Response.Location })
+    res.status(200).send({ id: s3Response.key, message: 'successfully uploaded' })
   } catch (err) {
     res.status(500).send(err)
   }
