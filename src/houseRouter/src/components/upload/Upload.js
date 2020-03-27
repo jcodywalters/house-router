@@ -46,28 +46,14 @@ class Upload extends Component {
   }
 
   renderActions() {
-    if (this.state.successfulUploaded) {
-      return (
-        <button
-          onClick={() => {
-            this.setState({ files: [], successfulUploaded: false })
-            this.props.history.push('/details', this.state);
-          }
-          }
-        >
-          Next
-        </button>
-      );
-    } else {
-      return (
-        <button
-          disabled={this.state.files.length < 0 || this.state.uploading}
-          onClick={this.uploadFiles}
-        >
-          Upload
-        </button>
-      );
-    }
+    return (
+      <button
+        disabled={this.state.files.length < 0 || this.state.uploading}
+        onClick={this.uploadFiles}
+      >
+        Upload
+      </button>
+    );
   }
 
   async uploadFiles() {
@@ -116,6 +102,7 @@ class Upload extends Component {
 
       req.onload = ((res) => {
         this.setState({ uploadResponse: res.srcElement.response })
+        this.props.history.push('/details', this.state);
       })
 
       const formData = new FormData();

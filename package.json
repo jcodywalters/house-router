@@ -1,0 +1,9 @@
+{
+  "name": "house-router",
+  "version": "1.0.0",
+  "repository": "git@github.com:jcodywalters/house-router.git",
+  "scripts": {
+    "api": "cd src/api && yarn dev",
+    "ui": "cd src/houseRouter && yarn start"
+  }
+}
