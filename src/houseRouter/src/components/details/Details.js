@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Details.css';
 
-class App extends Component {
+class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,55 +21,65 @@ class App extends Component {
   }
 
   async handleSubmit() {
-    const { data } = await axios.post('http://localhost:3000/house-router-dev/v1', {
-      "origin": this.state.origin,
-      "destinations": this.state.destinations.split(';'),
-    });
-    this.setState({ optimizedList: data })
-    console.log('!! result =>  ', data, '!!');
+    try {
+      const { data } = await axios.post('http://localhost:8000/house-router-dev/v1', {
+        "origin": this.state.origin,
+        "destinations": this.state.destinations,
+      });
+      this.setState({ optimizedList: data })
+      console.log('!! result =>  ', data, '!!');
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
   }
 
-  componentDidMount() {
-    console.log(this.props)
-    this.setState({destinations: ['15146 65th Ave S']})
-    // const { data } = await axios.get()
+  async componentDidMount() {
+    const { id } = JSON.parse(this.props.history.location.state.uploadResponse);
+    try {
+      const { data } = await axios.get(`http://localhost:8000/house-router-dev/v1/destinations?id=${id}`);
+      this.setState({ destinations: data });
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>House Router</h1>
-          <p>What is start address?</p>
-          <input
-            type="text"
-            onChange={this.handleChange}
-            name="origin"
-            defaultValue="<Enter Starting Address>"
-          />
-          <p>Add your list of addresses</p>
-          <textarea
-            rows="20"
-            cols="35"
-            name="destinations"
-            onChange={this.handleChange}
-            // defaultValue="15146 65th Ave S, Tukwila, WA 98188, USA;15146 65th Ave S, Tukwila, WA 98188, USA;15210 Macadam Rd S APT D103, Tukwila, WA 98188, USA"
-            defaultValue={this.state.destinations}
-          />
-          <input type="submit" value="Optimize Routes!" size="50" onClick={this.handleSubmit}></input>
-          <p></p>
-          <textarea
-            rows="10"
-            cols="50"
-            name="result"
-            readOnly={true}
-            value={this.state.optimizedList}
-          />
-          {/* <div>{this.state.optimizedList}</div> */}
-        </header>
+        <div className="Card">
+          <div className="Details">
+            <div className="Content">
+              <div>
+                <span className="Title">What is your starting address?</span>
+                <input
+                  type="text"
+                  onChange={this.handleChange}
+                  name="origin"
+                />
+              </div>
+              <div>
+                <span className="Title">Destinations</span>
+                <textarea
+                  rows="10"
+                  cols="40"
+                  name="destinations"
+                  onChange={this.handleChange}
+                  defaultValue={this.state.destinations}
+                />
+              </div>
+            </div>
+            <p></p>
+            <p></p>
+            <div className="Action">
+              <button onClick={this.handleSubmit}>Optimize Routes</button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default Details;
