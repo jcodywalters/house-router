@@ -72,8 +72,12 @@ button {
   overflow: hidden;
 }
 
+input {
+  width: 80%;
+  height: 10%;
+}
+
 .Title {
   margin-bottom: 32px;
   color: #555;
 }
-

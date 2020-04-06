@@ -9,6 +9,7 @@ import {
 import './index.css';
 import Landing from './components/landing/Landing'
 import Details from './components/details/Details'
+import Results from './components/results/Results'
 
 ReactDOM.render((
   <Router>
@@ -16,6 +17,7 @@ ReactDOM.render((
     <Switch>
       <Route exact path="/" component={Landing}></Route>
       <Route exact path="/details" component={Details}></Route>
+      <Route exact path="/results" component={Results}></Route>
     </Switch>
   </div>
 </Router>
