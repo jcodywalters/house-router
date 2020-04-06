@@ -27,7 +27,7 @@ class Details extends Component {
         "destinations": this.state.destinations,
       });
       this.setState({ optimizedList: data })
-      console.log('!! result =>  ', data, '!!');
+      this.props.history.push('/results', this.state);
     } catch (error) {
       console.log(error);
       throw new Error(error);
