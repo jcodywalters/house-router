@@ -4,7 +4,16 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./app-local.js -r dotenv/config"
+    "build": "docker-compose build",
+    "build:deploy": "yarn build && yarn tag:image && yarn docker:push && yarn release",
+    "dev": "nodemon --exec babel-node ./app.js",
+    "deploy": "yarn docker:push && yarn release",
+    "release": "heroku container:release web --app house-router-api-dev",
+    "api:dev": "docker-compose up",
+    "heroku:login": "heroku container:login",
+    "docker:login": "docker login --username=_ --password=$(heroku auth:token) registry.heroku.com",
+    "docker:push": "docker push registry.heroku.com/house-router-api-dev/web",
+    "tag:image": "docker tag house-router:api registry.heroku.com/house-router-api-dev/web:latest"
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.8.4",

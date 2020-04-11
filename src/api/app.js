@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 import fileUpload from 'express-fileupload';
 import morgan from 'morgan';
 
@@ -17,7 +16,6 @@ const app = express();
 
 // Configure the router
 const router = express.Router();
-router.use(awsServerlessExpressMiddleware.eventContext());
 router.use(bodyParser.json());
 router.use(cors());
 router.use(fileUpload());
@@ -35,4 +33,8 @@ const basePath = (ENV === undefined || ENV === 'production') ?
 const basePathWithStageName = `/${basePath}/v1`;
 
 app.use(basePathWithStageName, router);
-module.exports = { app, basePathWithStageName };
+
+const port = process.env.PORT || 3000;
+
+app.listen(port);
+console.log(`listening on http://localhost:${port}${basePathWithStageName}`);
