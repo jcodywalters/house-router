@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Details.css';
+import { API_ENDPOINT } from '../../config/constants'
 
 class Details extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Details extends Component {
 
   async handleSubmit() {
     try {
-      const { data } = await axios.post('http://localhost:8000/house-router-dev/v1', {
+      const { data } = await axios.post(API_ENDPOINT, {
         "origin": this.state.origin,
         "destinations": this.state.destinations,
       });
@@ -37,7 +38,7 @@ class Details extends Component {
   async componentDidMount() {
     const { id } = JSON.parse(this.props.history.location.state.uploadResponse);
     try {
-      const { data } = await axios.get(`http://localhost:8000/house-router-dev/v1/destinations?id=${id}`);
+      const { data } = await axios.get(`${API_ENDPOINT}/destinations?id=${id}`);
       this.setState({ destinations: data });
     } catch (error) {
       console.log(error);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { GOOGLE_MAPS_API_KEY } from '../../config/constants';
 import './Results.css'
 
 class Results extends Component {
@@ -9,7 +9,7 @@ class Results extends Component {
       optimizedList: props.history.location.state.optimizedList,
       staticMapQuery: '',
       googleMapsQuery: '',
-      googleApiKey: '<GOOGLE_API_KEY>',
+      googleApiKey: GOOGLE_MAPS_API_KEY,
       googleStaticMapUrlBase: 'https://maps.googleapis.com/maps/api/staticmap',
       googleMapsUrlBase: 'https://www.google.com/maps/dir'
     };
