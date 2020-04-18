@@ -13,10 +13,16 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:deploy": "yarn docker:build && yarn tag:image && yarn docker:push && yarn release",
+    "docker:build": "docker-compose build",
+    "docker:push": "docker push registry.heroku.com/house-router-dev/web",
+    "eject": "react-scripts eject",
+    "release": "heroku container:release web --app house-router-dev",
+    "start": "./node_modules/.bin/react-scripts start",
+    "tag:image": "docker tag house-router:ui registry.heroku.com/house-router-dev/web:latest",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "ui:dev": "docker-compose up"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Upload.css'
 import Dropzone from '../dropzone/Dropzone'
 import Progress from '../progress/Progress'
+import { API_ENDPOINT } from '../../config/constants'
 
 class Upload extends Component {
   constructor(props) {
@@ -108,7 +109,7 @@ class Upload extends Component {
       const formData = new FormData();
       formData.append("file", file, file.name);
 
-      req.open("POST", 'http://localhost:8000/house-router-dev/v1/upload');
+      req.open("POST", `${API_ENDPOINT}/upload`);
       req.send(formData);
     })
   }

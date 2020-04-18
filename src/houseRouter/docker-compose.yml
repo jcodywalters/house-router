@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: house-router:ui
+    container_name: ui
+    env_file: .env.local
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/ui
+      - /ui/node_modules
